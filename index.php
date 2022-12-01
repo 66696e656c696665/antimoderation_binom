@@ -11,7 +11,10 @@ $unic_token = $unic_token;
 
 
 $white = stripos('qqq'.$getClick->DataClick['landing']['name'], 'white');
-
+if($white){
+	include('./white.php');
+	exit();
+}
 if (!$_GET[$unic_token] || stripos('qqq'.$_GET[$unic_token], '{')){
 	include('./white.php');
 	exit();
