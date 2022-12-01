@@ -1,6 +1,6 @@
 <?php
 include 'binom_click_api.php';
-$unic_token = $unic_token;
+$unic_token = 'campid';
 //echo phpinfo();
 
 //echo '<html><pre>';
@@ -16,6 +16,8 @@ if($white){
 	exit();
 }
 if (!$_GET[$unic_token] || stripos('qqq'.$_GET[$unic_token], '{')){
+	echo stripos('qqq'.$_GET[$unic_token], '{');
+	echo $_GET[$unic_token];
 	include('./white.php');
 	exit();
 }
@@ -29,7 +31,7 @@ $dbname = './unics.db';
 
 $token = $_GET[$unic_token];
 
-
+echo $token;
 if(!file_exists($dbname)){
 	$db=new SQLite3($dbname);
 	$sql="CREATE TABLE stats(id INTEGER PRIMARY KEY, token TEXT, clicks INTEGER, ping INTEGER)";
@@ -44,7 +46,7 @@ if ($result){
 	$sql = "UPDATE stats SET clicks = clicks + 1 WHERE token = '$token'";
     $result = $db->exec($sql);
 } else {
-	$requare = "INSERT INTO stats(token, clicks) VALUES('$token', 1)";
+	$requare = "INSERT INTO stats(token, clicks, ping) VALUES('$token', 1, 0)";
 	$db->exec($requare);
 }
 
